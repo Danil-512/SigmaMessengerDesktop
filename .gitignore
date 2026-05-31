@@ -1,0 +1,90 @@
+# Visual Studio и .NET специфичные файлы
+## Игнорируем стандартные папки сборки
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+
+
+
+## Игнорируем пользовательские файлы Visual Studio
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+.vs/
+
+## Игнорируем файлы отладки
+*.pdb
+*.ilk
+*.log
+*.cache
+*.tmp
+
+## Игнорируем NuGet пакеты
+packages/
+*.nupkg
+*.nuget.props
+*.nuget.targets
+
+## Игнорируем установщики
+*.exe
+*.msi
+*.msm
+*.msp
+setup.exe
+*.Setup.exe
+
+## Игнорируем резервные копии
+*~
+*.bak
+*.tmp
+*.temp
+
+## Игнорируем файлы производительности
+*.psess
+*.vsp
+*.psess
+*.vspx
+*.coverage
+*.trx
+
+## Игнорируем файлы диагностики
+*.ncrunchsolution
+*.ncrunchproject
+
+## Игнорируем файлы ReSharper
+_ReSharper*/
+*.DotSettings.user
+*.DotSettings
+
+## Игнорируем файлы Rider
+.idea/
+*.sln.iml
+
+## Игнорируем папки с ресурсами времени выполнения
+WebView2Data/
+*.WebView2/
+
+## Игнорируем файлы иконок в собранной версии (но сохраняем исходники)
+**/bin/**/src/*.ico
+**/bin/**/src/*.jpg
+**/bin/**/src/*.png
+
+## Игнорируем архивы
+*.zip
+*.rar
+*.7z
+
+## Игнорируем логи
+*.log
+logs/
+
+## Игнорируем временные файлы Windows
+Thumbs.db
+desktop.ini
+ehthumbs.db
+*.DS_Store
