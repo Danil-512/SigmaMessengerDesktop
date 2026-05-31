@@ -20,17 +20,20 @@ namespace SigmaDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+        private bool isMusicPlaying = true;
+
         private const string ALLOWED_DOMAIN = "tchk.site";
         private const string START_URL = "https://tchk.site";
         public MainWindow()
         {
+            
             InitializeComponent();
             Loaded += MainWindow_Loaded;
             SetWindowIcon();
             SetAppIcon();
         }
-
-
+        
         private void SetAppIcon()
         {
             try
@@ -77,7 +80,7 @@ namespace SigmaDesktop
                     // Путь относительно корня проекта (для отладки)
                     System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "icon2.jpg"),
 
-                    System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SigmaDesktop", "src", "icon2.jpg"),
+                    System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "src", "icon2.jpg"),
 
                     System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "src", "icon2.jpg"),
 
@@ -152,6 +155,9 @@ namespace SigmaDesktop
                         Title = $"Мессенджер - {webView.CoreWebView2.DocumentTitle}";
                     });
                 };
+
+                // Запуск музыки
+                PlayBackgroundMusic();
             }
             catch (Exception ex)
             {
@@ -162,6 +168,9 @@ namespace SigmaDesktop
                 Application.Current.Shutdown();
             }
         }
+
+
+
 
         // Запрещаем открытие новых окон
         private void OnNewWindowRequested(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NewWindowRequestedEventArgs e)
@@ -206,6 +215,57 @@ namespace SigmaDesktop
                               MessageBoxButton.OK,
                               MessageBoxImage.Error);
             }
+        }
+
+        private void PlayBackgroundMusic()
+        {
+            try
+            {
+                // Путь к музыке
+                string musicPath = null;
+
+                string path1 = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "src", "ost.mp3");
+
+                string path2 = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "src", "ost.mp3");
+
+                // Проверяем первый путь
+                if (System.IO.File.Exists(path1))
+                {
+                    musicPath = path1;
+                }
+                // Если нет, проверяем второй путь
+                else if (System.IO.File.Exists(path2))
+                {
+                    musicPath = path2;
+                }
+
+                if (System.IO.File.Exists(musicPath))
+                {
+                    mediaPlayer.Open(new Uri(musicPath, UriKind.Absolute));
+                    mediaPlayer.MediaEnded += (s, ev) =>
+                    {
+                        // Зацикливаем музыку
+                        mediaPlayer.Position = TimeSpan.Zero;
+                        mediaPlayer.Play();
+                    };
+                    mediaPlayer.Volume = 0.5; // Громкость 50% (от 0 до 1)
+                    mediaPlayer.Play();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Не удалось воспроизвести музыку: {ex.Message}");
+            }
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            PlayBackgroundMusic();
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Останавливаем музыку при закрытии
+            mediaPlayer?.Stop();
+            mediaPlayer?.Close();
         }
 
         // Очистка ресурсов при закрытии

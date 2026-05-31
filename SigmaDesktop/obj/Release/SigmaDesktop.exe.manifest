@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SigmaDesktop.exe" size="24496">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SigmaDesktop.exe" size="25008">
       <assemblyIdentity name="SigmaDesktop" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lmUg3E75E2got5GrwRhIktC9w9tdv+VeFSpSbuvRocM=</dsig:DigestValue>
+        <dsig:DigestValue>PiNQyZDQInnjEo4PjfB4NYh7y2t2xWNq1Nj00BnRSq4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

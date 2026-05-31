@@ -7,6 +7,8 @@
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
 >
     <Grid>
         <Grid.RowDefinitions>
@@ -31,7 +33,12 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#2D2D2D">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
 
         <wv2:WebView2 x:Name="webView" 
                       Grid.Row="0" 
@@ -39,7 +46,8 @@
                       Grid.ColumnSpan="5" 
                       Grid.RowSpan="13"
                       VerticalAlignment="Stretch"
-                      HorizontalAlignment="Stretch"
-        />
+                      HorizontalAlignment="Stretch"/>
+
+        
     </Grid>
 </Window>
